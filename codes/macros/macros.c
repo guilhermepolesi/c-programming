@@ -7,7 +7,12 @@
 #define MAX(x, y) (x > y ? x : y)
 #define VAR(x) printf("The variable "#x" has the value: %d\n", x);
 
-#define DEBUG 
+#define DEBUG
+
+#ifndef MY_DEF // MY_DEF is not defined
+#define MY_DEF // MY_DEF is defined 
+#endif
+#undef MY_DEF // MY_DEF is no longer defined
 
 int main() {
 
@@ -27,10 +32,16 @@ int main() {
     printf("%d\n", MAX(3,9));
 
     int var = 10;
+
+
 #ifdef DEBUG
     printf("I'm on the line %d\n", __LINE__);
     printf("Time: %s\n", __TIME__);
     VAR(var);
-#endif    
+#elif defined(TEST)
+    puts("Test mode activated");
+#else
+    puts("Default code executed");
+#endif
     return 0;
 }
